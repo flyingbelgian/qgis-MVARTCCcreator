@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/mva_rtcc" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
