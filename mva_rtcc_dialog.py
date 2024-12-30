@@ -60,7 +60,7 @@ class MvaRtccDialog(QtWidgets.QDialog, FORM_CLASS):
         self.qgsCrs.crsChanged.connect(self.evt_qgsCrs_crsChanged)
 
     def evt_btnSelectCSV_clicked(self):
-        fileref = QFileDialog.getOpenFileName(self,"Open File", "C:", "Comma Separated Values (*.csv);;Plain Text (*.txt)")
+        fileref = QFileDialog.getOpenFileName(self,"Open File", "C:", "Comma Separated Values (*.csv);;Plain Text (*.txt)") # if default directory isn't recognised it will default to cwd
         self.filename = fileref[0]
 
         with open(self.filename, "r", encoding="utf-8-sig") as file:
@@ -88,6 +88,8 @@ class MvaRtccDialog(QtWidgets.QDialog, FORM_CLASS):
         self.qgsCrs.setEnabled(True)
         self.btnCreate.setEnabled(True)
 
+        # print(self.csvsampledata)
+
     def evt_cmbElevation_currentIndexChanged(self):
         self.ledElevation.setText(self.csvsampledata[self.cmbElevation.currentIndex()])
     def evt_cmbSurface_currentIndexChanged(self):
@@ -99,3 +101,4 @@ class MvaRtccDialog(QtWidgets.QDialog, FORM_CLASS):
 
     def evt_qgsCrs_crsChanged(self):
         self.crs = self.qgsCrs.crs()
+    
