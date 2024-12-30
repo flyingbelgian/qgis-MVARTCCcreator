@@ -27,7 +27,6 @@ from qgis.PyQt.QtWidgets import QAction
 
 from qgis.core import QgsVectorLayer, QgsField, QgsFeature, QgsPoint, QgsLineString, QgsPolygon, QgsMultiPolygon, QgsProject, QgsCoordinateReferenceSystem
 
-
 import csv
 
 # Initialize Qt resources from file resources.py
@@ -220,31 +219,10 @@ class MvaRtcc:
             prevlayer = ""
             prevpolygon = ""
 
-            # layercolors = {
-            #     "1500":"#ff0000",
-            #     "1600":"#ff4400",
-            #     "1700":"#ff8800",
-            #     "1800":"#ffcc00",
-            #     "2000":"#ddff00",
-            #     "2100":"#aaff00",
-            #     "2200":"#66ff00",
-            #     "2500":"#22ee00",
-            #     "2700":"#00ff22",
-            #     "3000":"#00ff66",
-            #     "3500":"#00ffaa",
-            #     "3600":"#00ffee",
-            #     "4000":"#00ccff",
-            #     "4500":"#0088ff",
-            #     "5000":"#0044ff",
-            #     "5500":"#0000ff"
-            # }
-
             for line in csvfile:
                 if firstline:
                     firstline = False
-                    # pass
                 else:
-                    # print(line)
                     if line[self.dlg.cmbElevation.currentIndex()] != prevlayer and not secondline:
                         # print("Different Layer")
                         polygons.append(polygon)
@@ -266,7 +244,6 @@ class MvaRtcc:
                     coordinates.append((x,y,z))
                     polygon = {"polygon":polygonID, "elevft":elevft, "elevm":elevm, "coordinates":coordinates}
                     datalayer = {"layer": layerID, "polygons":polygons}
-                    # print(polygon)
                     prevlayer = line[self.dlg.cmbElevation.currentIndex()]
                     prevpolygon = line[self.dlg.cmbSurface.currentIndex()]
 
@@ -283,18 +260,7 @@ class MvaRtcc:
         layer.updateFields()
 
         for datalayer in datalayers:
-            # print(datalayer["layer"])
-            # for polygon in datalayer["polygons"]:
-            #     # print(f"  Polygon {polygon["polygon"]}: Elev ft ({polygon["elevft"]}) Elev m ({polygon["elevm"]})")
-            #     for coordinate in polygon["coordinates"]:
-            #         print(coordinate)
-
             polyfeature = QgsFeature()
-            # points = [
-            #     (528500,6857600,10),
-            #     (528500,6857700,100),
-            #     (528750,6857700,100),
-            #     (528750,6857600,10)]
             polygons = []
             for polygon in datalayer["polygons"]:
                 poly = QgsPolygon(QgsLineString([QgsPoint(*p) for p in polygon["coordinates"]]))
@@ -304,7 +270,6 @@ class MvaRtcc:
             polyfeature.setAttributes([polygon["elevft"],polygon["elevm"]])
             
             pr.addFeatures([polyfeature])
-            
             
         layer.updateExtents()
         QgsProject.instance().addMapLayers([layer])
