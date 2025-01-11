@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>500</width>
-    <height>220</height>
+    <height>280</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -31,7 +31,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>160</y>
+     <y>220</y>
      <width>80</width>
      <height>50</height>
     </rect>
@@ -294,6 +294,116 @@ Surfaces</string>
    </property>
    <property name="text">
     <string>Data Sample:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="lblMoc">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>220</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>RTCC MOC</string>
+   </property>
+  </widget>
+  <widget class="QDoubleSpinBox" name="dsbMoc">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>220</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <double>2000.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>300.000000000000000</double>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cmbMocUnits">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>220</y>
+     <width>50</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>m</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>ft</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QLabel" name="lblBuffer">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>250</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>RTCC Buffer</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="cmbBufferUnits">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>250</y>
+     <width>50</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <item>
+    <property name="text">
+     <string>NM</string>
+    </property>
+   </item>
+   <item>
+    <property name="text">
+     <string>m</string>
+    </property>
+   </item>
+  </widget>
+  <widget class="QDoubleSpinBox" name="dsbBuffer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>250</y>
+     <width>100</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="maximum">
+    <double>10000.000000000000000</double>
+   </property>
+   <property name="value">
+    <double>3.000000000000000</double>
    </property>
   </widget>
  </widget>

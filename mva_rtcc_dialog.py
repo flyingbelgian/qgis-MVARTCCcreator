@@ -51,7 +51,7 @@ class MvaRtccDialog(QtWidgets.QDialog, FORM_CLASS):
         self.csvsampledata = []
         self.crs = QgsCoordinateReferenceSystem("EPSG:4326")
         self.qgsCrs.setCrs(self.crs)
-       
+
         self.btnSelectCSV.clicked.connect(self.evt_btnSelectCSV_clicked)
         self.cmbElevation.currentIndexChanged.connect(self.evt_cmbElevation_currentIndexChanged)
         self.cmbSurface.currentIndexChanged.connect(self.evt_cmbSurface_currentIndexChanged)
@@ -60,14 +60,13 @@ class MvaRtccDialog(QtWidgets.QDialog, FORM_CLASS):
         self.qgsCrs.crsChanged.connect(self.evt_qgsCrs_crsChanged)
 
     def evt_btnSelectCSV_clicked(self):
-        fileref = QFileDialog.getOpenFileName(self,"Open File", "C:", "Comma Separated Values (*.csv);;Plain Text (*.txt)") # if default directory isn't recognised it will default to cwd
+        fileref = QFileDialog.getOpenFileName(self,"Open File", os.path.abspath(os.sep), "Comma Separated Values (*.csv);;Plain Text (*.txt)")
         self.filename = fileref[0]
-
         with open(self.filename, "r", encoding="utf-8-sig") as file:
             csvfile = csv.reader(file)
             self.csvheadings = next(csvfile)
             self.csvsampledata = next(csvfile)
-        
+        # Populate and enable the ui items once file is selected
         self.txtCSV.setText(self.filename)
         self.cmbElevation.clear()
         self.cmbElevation.addItems(self.csvheadings)
@@ -86,10 +85,13 @@ class MvaRtccDialog(QtWidgets.QDialog, FORM_CLASS):
         self.cmbLon.setCurrentIndex(3)
         self.cmbLon.setEnabled(True)
         self.qgsCrs.setEnabled(True)
+        self.dsbMoc.setEnabled(True)
+        self.cmbMocUnits.setEnabled(True)
+        self.dsbBuffer.setEnabled(True)
+        self.cmbBufferUnits.setEnabled(True)
         self.btnCreate.setEnabled(True)
 
-        # print(self.csvsampledata)
-
+    # Actions to show sample data in ui
     def evt_cmbElevation_currentIndexChanged(self):
         self.ledElevation.setText(self.csvsampledata[self.cmbElevation.currentIndex()])
     def evt_cmbSurface_currentIndexChanged(self):
@@ -99,6 +101,7 @@ class MvaRtccDialog(QtWidgets.QDialog, FORM_CLASS):
     def evt_cmbLon_currentIndexChanged(self):
         self.ledLon.setText(self.csvsampledata[self.cmbLon.currentIndex()])
 
+    # Register the selected csr as variable
     def evt_qgsCrs_crsChanged(self):
         self.crs = self.qgsCrs.crs()
     
