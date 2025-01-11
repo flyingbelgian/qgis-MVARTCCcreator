@@ -418,4 +418,4 @@ class MvaRtcc:
         myRendererRtcc = QgsCategorizedSymbolRenderer("MVA Sector Elev (ft)", myRenderListRtcc)
         layerRtcc.setRenderer(myRendererRtcc)
 
-        pass
+        self.dlg.close()
